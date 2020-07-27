@@ -23,7 +23,8 @@ git(["remote", "add", "origin", "git@github.com:NSU-Programming/{}.git".format(n
 
 print("accessing Github account")
 with open(os.path.expanduser("~/.github/token")) as f:
-    gt = f.read().strip()
+    gt = f.read().strip("\n")
+    print(gt) # WTF!
 g = Github(gt)
 org = g.get_organization("NSU-Programming")
 repos = [repo.name for repo in org.get_repos()]
