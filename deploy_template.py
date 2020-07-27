@@ -22,7 +22,9 @@ git(["commit", "-m", "Publish task template"])
 git(["remote", "add", "origin", "git@github.com:NSU-Programming/{}.git".format(name)])
 
 print("accessing Github account")
-g = Github(os.environ["GITHUB_TOKEN"])
+with open(os.path.expanduser("~/.github/token")) as f:
+    gt = f.read()
+g = Github(gt)
 org = g.get_organization("NSU-Programming")
 repos = [repo.name for repo in org.get_repos()]
 if name not in repos:
